@@ -64,6 +64,8 @@ app.delete('/api/:id', (req, res)=>{
   res.json(notes)
 })
 
-app.listen(3001,()=>{
-  console.log("Puerto iniciado en 3001")
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, ()=>{
+  console.log(`Aplicación iniciada en Puerto ${PORT}`)
 })
