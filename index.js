@@ -7,8 +7,7 @@ const Note = require('./models/Note.js')
 
 
 app.use(cors({
-  "origin" : '*',
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
+  origin : ["http://127.0.0.1:3000","http://localhost:3000"]
 }))
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
@@ -85,9 +84,9 @@ app.put('/api/notes/:id', (req, res, next)=>{
 })
 
 
-app.delete('/api/notes/:id', (req, res)=>{
+app.delete('/api/notes/:id', (req, res, next)=>{
   const {id} = req.params
-  Note.findByIdAndDelete(id)
+  Note.findByIdAndDelete(id).then(() => res.status(204).end()).catch(err=>next(err))
 })
 
 app.use((req, res, next) => {
