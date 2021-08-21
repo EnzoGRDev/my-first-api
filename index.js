@@ -6,11 +6,13 @@ const cors = require('cors')
 const Note = require('./models/Note.js')
 
 
-app.use(cors())
+app.use(cors({
+  "origin" : '*',
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 
-let notes = []
 
 app.get('/', (req, res)=>{
   res.send(
