@@ -1,9 +1,14 @@
 const { Schema, model } = require('mongoose')
 
 const noteSchema = new Schema({
+  title: String,
   content: String,
   date: Date,
   important: Boolean,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 noteSchema.set('toJSON', {
@@ -18,17 +23,3 @@ const Note = model('Note', noteSchema)
 
 module.exports = Note
 
-
-// const note = new Note({
-//   content: "Javascript",
-//   date: new Date(),
-//   important: true
-// })
-
-// note
-//   .save()
-//     .then(result => {
-//       console.log(result)
-//       mongoose.connection.close()
-//     })
-//     .catch(err  => console.log(err))
